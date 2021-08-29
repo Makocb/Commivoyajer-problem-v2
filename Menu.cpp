@@ -7,7 +7,7 @@ Menu::Menu()
 {
 }
 
-void Menu::runMainMenu(std::vector<Event>& queue, bool& runApp)
+void Menu::runMainMenu(std::vector<Event>& queue, bool& runApp, bool& useMultithreading)
 {
 	std::string inpString;
 	
@@ -19,22 +19,51 @@ void Menu::runMainMenu(std::vector<Event>& queue, bool& runApp)
 
 	std::cin >> inpString;
 
-	if (inpString == "close")
+	if ((inpString == "--close") || (inpString == "-c"))
 	{
-		queue.push_back(Event([&runApp]() { runApp = false; }));
+		if (useMultithreading)
+		{
+			queue.insert(queue.begin() + 2, (Event([&runApp]() { runApp = false; })));
+		}
+		else
+		{
+			queue.insert(queue.begin() + 1, (Event([&runApp]() { runApp = false; })));
+		}
 	}
-	else if (inpString == "help")
+	else if ((inpString == "--help") || (inpString == "-h"))
 	{
 		for (int i = 0; i < Globals::eventNames.size(); i++)
 		{
 			std::cout << i + 1 << ": " << Globals::eventNames[i] << std::endl;
 		}
 	}
+	else if ((inpString == "--enable_multithreading") || (inpString == "-em"))
+	{
+		if (!useMultithreading)
+		{
+			queue.insert(queue.begin() + 1, Event([&useMultithreading]() {useMultithreading = true; std::cout << "Multithreading enabled" << std::endl; }));
+		}
+	}
+	else if ((inpString == "--disable_multithreading") || (inpString == "-dm"))
+	{
+		if (useMultithreading)
+		{
+			queue.insert(queue.begin() + 1, Event([&useMultithreading]() {useMultithreading = false; std::cout << "Multithreading disabled" << std::endl; }));
+			queue.insert(queue.begin() + 1, Event([]() {std::cout << "Dummy function has been executed" << std::endl; }));
+		}
+	}
+	else if ((inpString == "--execute_algorythms") || (inpString == "-ea"))
+	{
+		//BNB algotithm: {}
+		queue.push_back(Event([]() {}));
+		//Taboo search algorithm: {} 
+		queue.push_back(Event([]() {}));
+	}
 	else
 	{
 		std::cout << "No such command: " << inpString << std::endl;
 	}
 
-	queue.push_back(Event([&queue, &runApp, this]() { runMainMenu(queue, runApp); }));
-
+	queue.push_back(Event([]() {std::cout << "Dummy function has been executed" << std::endl; }));
+	queue.push_back(Event([&queue, &runApp, this, &useMultithreading]() { runMainMenu(queue, runApp, useMultithreading); }));
 }

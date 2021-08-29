@@ -11,7 +11,8 @@ namespace Globals
 
 	extern bool runInnitialized;
 
-	const std::vector<std::string> eventNames = { "close", "help" };
+	const std::vector<std::string> eventNames = { "--close / -c", "--help / -h", "--enable_multithreading / -em",
+		"--disable_multithreading / -dm", "--execute_algorythms / -ea" };
 
 	const std::string lineSeparator = "====================";
 }
