@@ -2,8 +2,6 @@
 
 #include <vector>
 
-#include "Globals.h"
-
 class Matrix
 {
 	public:

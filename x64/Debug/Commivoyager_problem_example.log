@@ -1,0 +1,9 @@
+﻿  App.cpp
+  Matrix.cpp
+C:\Users\Lisig\source\repos\zip\Matrix.cpp(14,17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Menu.cpp
+  main.cpp
+  Generating Code...
+C:\Users\Lisig\source\repos\zip\Matrix.cpp(81): warning C4715: 'Matrix::minInCol': not all control paths return a value
+C:\Users\Lisig\source\repos\zip\Matrix.cpp(55): warning C4715: 'Matrix::minInRow': not all control paths return a value
+  Commivoyager_problem_example.vcxproj -> C:\Users\Lisig\source\repos\zip\x64\Debug\Commivoyager_problem_example.exe

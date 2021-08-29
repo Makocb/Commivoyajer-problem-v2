@@ -2,6 +2,8 @@
 
 #include <ctime>
 #include <iostream>
+#include "Globals.h"
+
 
 Matrix::Matrix():Matrix(Globals::defaultGenerationMin, Globals::defaultGenerationMax, Globals::defaultSize)
 {

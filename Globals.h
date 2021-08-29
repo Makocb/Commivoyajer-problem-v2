@@ -1,8 +1,17 @@
 #pragma once
 
+#include <vector>
+#include <string>
+
 namespace Globals
 {
-	int defaultGenerationMin = 0;
-	int defaultGenerationMax = 10;
-	int defaultSize = 5;
+	const int defaultGenerationMin = 0;
+	const int defaultGenerationMax = 10;
+	const int defaultSize = 5;
+
+	extern bool runInnitialized;
+
+	const std::vector<std::string> eventNames = { "close", "help" };
+
+	const std::string lineSeparator = "====================";
 }
